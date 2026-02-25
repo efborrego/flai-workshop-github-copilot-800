@@ -35,11 +35,12 @@ router.register(r'leaderboard', LeaderboardViewSet, basename='leaderboard')
 router.register(r'workouts', WorkoutViewSet, basename='workout')
 
 # Determine base URL based on environment
+# This is used for documentation and CSRF trust; DRF reverse() builds URLs from the request
 codespace_name = os.environ.get('CODESPACE_NAME')
 if codespace_name:
-    base_url = f"https://{codespace_name}-8000.app.github.dev"
+    BASE_URL = f"https://{codespace_name}-8000.app.github.dev"
 else:
-    base_url = "http://localhost:8000"
+    BASE_URL = "http://localhost:8000"
 
 urlpatterns = [
     path('admin/', admin.site.urls),
