@@ -43,10 +43,22 @@ class LeaderboardSerializer(serializers.ModelSerializer):
     id = serializers.CharField(read_only=True)
     user_name = serializers.CharField(source='user.name', read_only=True)
     user_email = serializers.CharField(source='user.email', read_only=True)
-    
+    team_name = serializers.SerializerMethodField()
+    total_calories = serializers.SerializerMethodField()
+
+    def get_team_name(self, obj):
+        team = obj.user.teams.first()
+        return team.name if team else 'No Team'
+
+    def get_total_calories(self, obj):
+        from django.db.models import Sum
+        total_duration = obj.user.activities.aggregate(Sum('duration'))['duration__sum'] or 0
+        # Estimate ~10 calories per minute of activity
+        return round(total_duration * 10)
+
     class Meta:
         model = Leaderboard
-        fields = ['id', 'user', 'user_name', 'user_email', 'score']
+        fields = ['id', 'user', 'user_name', 'user_email', 'team_name', 'total_calories', 'score']
 
 
 class WorkoutSerializer(serializers.ModelSerializer):
