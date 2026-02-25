@@ -51,8 +51,30 @@ class LeaderboardSerializer(serializers.ModelSerializer):
         return team.name if team else 'No Team'
 
     def get_total_calories(self, obj):
+        """
+        Return total calories for the user.
+
+        To avoid N+1 aggregate queries on list views, this method first checks for
+        precomputed/annotated fields on the object (e.g., `total_calories` or
+        `total_duration`) and only falls back to an aggregate query if those are
+        not present.
+        """
+        # Prefer an already annotated total_calories field if available.
+        annotated_calories = getattr(obj, 'total_calories', None)
+        if annotated_calories is not None:
+            return round(annotated_calories)
+
+        # Next, prefer an annotated total_duration field if available.
+        annotated_duration = getattr(obj, 'total_duration', None)
+        if annotated_duration is not None:
+            # Estimate ~10 calories per minute of activity
+            return round(annotated_duration * 10)
+
+        # Fallback: compute from the database for this single user.
         from django.db.models import Sum
-        total_duration = obj.user.activities.aggregate(Sum('duration'))['duration__sum'] or 0
+        total_duration = (
+            obj.user.activities.aggregate(total_duration=Sum('duration')).get('total_duration') or 0
+        )
         # Estimate ~10 calories per minute of activity
         return round(total_duration * 10)
 
