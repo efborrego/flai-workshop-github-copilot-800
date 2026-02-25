@@ -104,10 +104,11 @@ DATABASES = {
     }
 }
 
-# CORS settings
-CORS_ALLOW_ALL_ORIGINS = True
-CORS_ALLOW_ALL_METHODS = True
-CORS_ALLOW_ALL_HEADERS = True
+# CORS settings - explicit allow-list of trusted front-end origins
+CORS_ALLOWED_ORIGINS = ['http://localhost:3000', 'http://127.0.0.1:3000']
+if os.environ.get('CODESPACE_NAME'):
+    CORS_ALLOWED_ORIGINS.append(f"https://{os.environ.get('CODESPACE_NAME')}-3000.app.github.dev")
+
 CORS_ALLOW_HEADERS = [
     'accept',
     'accept-encoding',
