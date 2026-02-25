@@ -5,7 +5,9 @@ function Users() {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
 
-  const apiUrl = `https://${process.env.REACT_APP_CODESPACE_NAME}-8000.app.github.dev/api/users/`;
+  const apiUrl = process.env.REACT_APP_CODESPACE_NAME
+    ? `https://${process.env.REACT_APP_CODESPACE_NAME}-8000.app.github.dev/api/users/`
+    : 'http://localhost:8000/api/users/';
 
   useEffect(() => {
     console.log('Users component: fetching from', apiUrl);
