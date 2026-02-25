@@ -1,17 +1,17 @@
 import React, { useState, useEffect } from 'react';
 
 const ACTIVITY_ICONS = {
-  running: '&#127939;',
-  cycling: '&#128692;',
-  swimming: '&#127946;',
-  yoga: '&#129496;',
-  weightlifting: '&#127947;',
+  running: '🏃',
+  cycling: '🚴',
+  swimming: '🏊',
+  yoga: '🧘',
+  weightlifting: '🏋️',
 };
 
 function activityIcon(type) {
-  if (!type) return '&#127939;';
+  if (!type) return '🏃';
   const key = type.toLowerCase();
-  return ACTIVITY_ICONS[key] || '&#9889;';
+  return ACTIVITY_ICONS[key] || '⚡';
 }
 
 function formatDate(dateStr) {
@@ -99,9 +99,7 @@ function Activities() {
                     <td className="text-muted">{index + 1}</td>
                     <td><span className="fw-semibold">{activity.user_name || activity.user}</span></td>
                     <td>
-                      <span
-                        dangerouslySetInnerHTML={{ __html: activityIcon(activity.activity_type) }}
-                      />{' '}
+                      <span>{activityIcon(activity.activity_type)}</span>{' '}
                       <span className="badge bg-primary">{activity.activity_type}</span>
                     </td>
                     <td>
