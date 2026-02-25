@@ -1,0 +1,25 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" width="64" height="64">
+  <defs>
+    <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#1a1a2e"/>
+      <stop offset="100%" style="stop-color:#0f3460"/>
+    </linearGradient>
+  </defs>
+  <!-- Background -->
+  <circle cx="32" cy="32" r="31" fill="url(#bg)"/>
+  <circle cx="32" cy="32" r="30" fill="none" stroke="#e94560" stroke-width="2"/>
+  <!-- Octopus head -->
+  <ellipse cx="32" cy="26" rx="13" ry="11" fill="#e94560"/>
+  <!-- Eyes -->
+  <circle cx="27" cy="24" r="3" fill="white"/>
+  <circle cx="37" cy="24" r="3" fill="white"/>
+  <circle cx="28" cy="24.5" r="1.5" fill="#1a1a2e"/>
+  <circle cx="38" cy="24.5" r="1.5" fill="#1a1a2e"/>
+  <!-- Tentacles -->
+  <path d="M 20 34 Q 15 40 17 46" stroke="#e94560" stroke-width="2.5" fill="none" stroke-linecap="round"/>
+  <path d="M 25 36 Q 21 43 23 49" stroke="#e94560" stroke-width="2.5" fill="none" stroke-linecap="round"/>
+  <path d="M 30 37 Q 27 44 29 50" stroke="#e94560" stroke-width="2.5" fill="none" stroke-linecap="round"/>
+  <path d="M 34 37 Q 37 44 35 50" stroke="#e94560" stroke-width="2.5" fill="none" stroke-linecap="round"/>
+  <path d="M 39 36 Q 43 43 41 49" stroke="#e94560" stroke-width="2.5" fill="none" stroke-linecap="round"/>
+  <path d="M 44 34 Q 49 40 47 46" stroke="#e94560" stroke-width="2.5" fill="none" stroke-linecap="round"/>
+</svg>
